@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span [routerLink]="['/']" class="pointer">My App</span>
+  <span class="example-spacer"></span>
+  <button mat-button  [routerLink]="['/viewcart']">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">shopping_cart</mat-icon>
+      <span class="position-absolute top-0 translate-middle badge rounded-pill bg-secondary">{{itemsCount}} <span class="visually-hidden">shoping cart</span></span>
+      Cart
+  </button>
+</mat-toolbar>

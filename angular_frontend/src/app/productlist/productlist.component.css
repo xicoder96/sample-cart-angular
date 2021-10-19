@@ -1,0 +1,9 @@
+.m-1em{
+    margin: 1em;
+}
+.w-fix{
+    min-width: 17rem;
+}
+.c-pointer{
+    cursor: pointer;
+}

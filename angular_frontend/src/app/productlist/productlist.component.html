@@ -1,0 +1,33 @@
+<div class="container mh-100 my-md-4 bd-layout">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="pt-2">Product list</h1>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="text-center" *ngIf="loading; else detailsBlock">
+                <div class="spinner-grow text-primary spinner-grow-lg" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <ng-template #detailsBlock>
+                <div class="col-lg-3 col-md-6 col-sm-12 w-fix" *ngFor="let product of products">
+                    <div class="card m-1em">
+                        <img [src]="product.imagesrc" class="card-img-top c-pointer" [alt]="product.name"
+                            [routerLink]="['/products', product.id]">
+                        <div class="card-body">
+                            <h2 class="card-title d-flex justify-content-between"><span>{{ product.name }}</span> <span
+                                    class=""> {{ product.price | currency:currencyCode }}</span></h2>
+                            <p class="card-text text-truncate" [title]="product.name + ' details'"
+                                *ngIf="product.description">{{ product.description }}</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary btn-sm" (click)="addToCart(product)">Add to cart</button>
+                                <app-product-alerts [product]="product" (notify)="onNotify()"></app-product-alerts>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

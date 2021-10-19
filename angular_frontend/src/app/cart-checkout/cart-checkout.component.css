@@ -1,0 +1,13 @@
+.img{
+    max-width: 280px;
+    max-height: 180px;
+}
+.w-25{
+    max-width:10%;
+}
+.product-images{
+    padding: 5px;
+}
+.pointer{
+    cursor: pointer;
+}

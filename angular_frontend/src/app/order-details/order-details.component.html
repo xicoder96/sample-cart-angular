@@ -1,0 +1,130 @@
+<div class="container mh-100 my-md-4 bd-layout">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="pt-2">View Order Details</h1>
+        </div>
+        <hr />
+        <div class="text-center" *ngIf="loading; else detailsBlock">
+            <div class="spinner-grow text-primary spinner-grow-lg" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <ng-template #detailsBlock>
+            <!-- If showDetails === true -->
+            <div class="row gy-4" id="print-section" *ngIf="showDetails; else elseBlock">
+                <div class="col-12">
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h4 class="my-1  d-flex justify-content-between"><span>Order date</span> <span
+                                        class="date">{{ orderDetails.createdAt | date}}</span></h4>
+
+                            </li>
+                            <li class="list-group-item">
+                                <h4 class="my-1  d-flex justify-content-between"><span>Order #</span> <span
+                                        class="order-id">{{ orderDetails.id }}</span></h4>
+                            </li>
+                            <li class="list-group-item">
+                                <h4 class="my-1  d-flex justify-content-between"><span>Total Amount</span> <span
+                                        class="price">
+                                        {{ totalAmount | currency:currencyCode}}</span></h4>
+                            </li>
+                        </ul>
+                        <!-- <div class="card-body d-grid">
+                        <button type="button" class="btn btn-default" printTitle="MyTitle"  
+                        printSectionId="print-section"  
+                        ngxPrint>Download invoice</button>
+                    </div>  -->
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="header">
+                        <h3 class="title">Shipment Details</h3>
+                    </div>
+                    <div class="card">
+                        <div class="cart-details p-2">
+                            <div class="cart-items my-2" *ngFor="let item of orderDetails.cartDetails; let i=index">
+                                <div class="d-flex position-relative">
+                                    <div class="product-images d-md-block d-sm-none">
+                                        <img [src]="item.product.imagesrc"
+                                            class="flex-shrink-0 me-3 img img-responsive"
+                                            [alt]="item.product.name">
+                                    </div>
+                                    <div class="w-100">
+                                        <h2 class="mt-0  d-flex justify-content-between"><span>{{item.product.name}}</span>
+                                            <span class="price mx-3">{{(item.product.price * item.qty) | currency:currencyCode }}</span>
+                                        </h2>
+                                        <p class="text-muted">
+                                            Qty: {{item.qty}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="header">
+                        <h3 class="title">Shipping Address</h3>
+                    </div>
+                    <div class="card">
+                        <div class="cart-details p-2">
+                            <div class="card-body">
+                                <div class="bd-example">
+                                    <address>
+                                        <strong>{{orderDetails.deliveryAddress.fullName}}</strong><br>
+                                        {{orderDetails.deliveryAddress.flatNo}}<br>
+                                        {{orderDetails.deliveryAddress.area}}, {{orderDetails.deliveryAddress.city}} {{orderDetails.deliveryAddress.pincode}}<br>
+                                        <abbr title="Mobile No.">P:</abbr> {{orderDetails.deliveryAddress.mobileNo}}
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="header">
+                        <h3 class="title">Order Summary</h3>
+                    </div>
+                    <div class="card">
+                        <div class="cart-details p-2">
+                            <div class="card-items">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <h4 class="my-1  d-flex justify-content-between"><span>Items:</span> <span
+                                                class="price sub-total">{{ totalAmount | currency:currencyCode}}</span></h4>
+
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h4 class="my-1  d-flex justify-content-between"><span>Delivery Charges:</span>
+                                            <span class="price delivery-charges">$0</span>
+                                        </h4>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h4 class="my-1  d-flex justify-content-between"><span>Total Amount</span> <span
+                                                class="price">
+                                                {{ totalAmount | currency:currencyCode}}</span></h4>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /If showDetails === true -->
+            <!-- If OrderDetails Empty -->
+            <ng-template #elseBlock>
+                <div class="row g-2">
+                    <div class="col-12 p-3 text-center bg-light">
+                        <div class="">
+                            <h2>Order Not Found :(</h2>
+                            <button type="button" class="btn btn-primary btn-md" [routerLink]="['/']">Continue
+                                Shopping</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <!-- /If OrderDetails Empty -->
+        </ng-template>
+    </div>
+</div>
